@@ -24,7 +24,7 @@
     <ToolCommandName>CheckedRepo</ToolCommandName>
     <PackageId>StarlyCode.CheckedRepo</PackageId>
     <Title>CheckedRepo</Title>
-    <VersionPrefix>0.2.0</VersionPrefix>
+    <VersionPrefix>0.2.4</VersionPrefix>
     <Description>
 		  This tool maintains a list of checked repositories.
 		</Description>
@@ -32,11 +32,12 @@
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <RepositoryUrl>https://github.com/StarlyCode/CheckedRepo</RepositoryUrl>
     <PackageTags>git</PackageTags>
-    <!--<PackageReadmeFile>README.md</PackageReadmeFile>-->
+    <PackageReadmeFile>README.md</PackageReadmeFile>
   </PropertyGroup>
   <ItemGroup>
     <None Include="paket.references" />
     <None Include="publish.ps1" />
+    <None Include="README.md" Pack="true" PackagePath="\" />
     <Compile Include="Program.fs" />
   </ItemGroup>
   <Import Project=".paket\Paket.Restore.targets" />
