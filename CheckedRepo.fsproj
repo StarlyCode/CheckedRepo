@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+  <!-- Op: Project _ exe net8.0 -->
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <AppendTargetFrameworkToOutputPath>False</AppendTargetFrameworkToOutputPath>
+    <!--GenerateResourceUsePreserializedResources>true</GenerateResourceUsePreserializedResources-->
+    <OutputType>Exe</OutputType>
+    <!--<AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>-->
+  </PropertyGroup>
+  <PropertyGroup>
+    <!--<DefineConstants>$(DefineConstants);CHECKEDREPO;NET8_0</DefineConstants>-->
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <PreBuildEvent>IF EXIST C:\DEV\temp\HP\*bin_Debug_CheckedRepo*_* DEL C:\DEV\temp\HP\*bin_Debug_CheckedRepo*_* /Q /F</PreBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <PreBuildEvent>IF EXIST C:\DEV\temp\HP\*bin_Release_CheckedRepo*_* DEL C:\DEV\temp\HP\*bin_Release_CheckedRepo*_* /Q /F</PreBuildEvent>
+    <PreBuildEvent>IF EXIST C:\DEV\temp\HP\C__Dev_Releases_CheckedRepo*_* DEL C:\DEV\temp\HP\C__Dev_Releases_CheckedRepo*_* /Q /F</PreBuildEvent>
+  </PropertyGroup>
+  <!-- Op: End -->
+  <PropertyGroup>
+    <PackAsTool>true</PackAsTool>
+    <ToolCommandName>CheckedRepo</ToolCommandName>
+    <PackageId>StarlyCode.CheckedRepo</PackageId>
+    <Title>CheckedRepo</Title>
+    <VersionPrefix>0.2.0</VersionPrefix>
+    <Description>
+		  This tool maintains a list of checked repositories.
+		</Description>
+    <Authors>Paul Staszko</Authors>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <RepositoryUrl>https://github.com/StarlyCode/CheckedRepo</RepositoryUrl>
+    <PackageTags>git</PackageTags>
+    <!--<PackageReadmeFile>README.md</PackageReadmeFile>-->
+  </PropertyGroup>
+  <ItemGroup>
+    <None Include="paket.references" />
+    <None Include="publish.ps1" />
+    <Compile Include="Program.fs" />
+  </ItemGroup>
+  <Import Project=".paket\Paket.Restore.targets" />
+</Project>
