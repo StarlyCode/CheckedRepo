@@ -24,7 +24,7 @@
     <ToolCommandName>CheckedRepo</ToolCommandName>
     <PackageId>StarlyCode.CheckedRepo</PackageId>
     <Title>CheckedRepo</Title>
-    <VersionPrefix>0.2.4</VersionPrefix>
+    <VersionPrefix>0.2.5</VersionPrefix>
     <Description>
 		  This tool maintains a list of checked repositories.
 		</Description>
