@@ -1,4 +1,4 @@
-# CheckedRepo
+# Directory Attribute Manager
 
 ## Install
 
@@ -10,5 +10,5 @@ dotnet nuget add source "https://nuget.pkg.github.com/StarlyCode/index.json" --n
 Then install as a dotnet tool
 
 ```pwsh
-dotnet tool install -g StarlyCode.CheckedRepo
+dotnet tool install -g StarlyCode.DirectoryAttributeManager
 ```

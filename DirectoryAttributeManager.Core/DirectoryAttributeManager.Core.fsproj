@@ -26,6 +26,7 @@
     <PackageReadmeFile>README.md</PackageReadmeFile>
   </PropertyGroup>
   <ItemGroup>
+    <None Include="publish.ps1" />
     <None Include="README.md">
       <PackagePath>\</PackagePath>
       <Pack>true</Pack>

@@ -2,6 +2,8 @@ open FSharp.SystemCommandLine
 open System.IO
 open DirectoryAttributeManager.Core.Utils
 open DirectoryAttributeManager.Core.Commands
+open System.CommandLine.Invocation
+open System.CommandLine.Help
 
 [<EntryPoint>] 
 let main argv =
@@ -22,7 +24,11 @@ let main argv =
         )
 
     let out (x: string) = System.Console.WriteLine x
-
+    
+    //let showHelp (ctx: InvocationContext) =
+    //    let hc = HelpContext(ctx.HelpBuilder, ctx.Parser.Configuration.RootCommand, System.Console.Out)
+    //    ctx.HelpBuilder.Write(hc)
+        
     rootCommand argv {
         description "Directory Attribute Manager"
         setHandler id
@@ -67,4 +73,5 @@ let main argv =
                 inputs (attribute, dir)
                 setHandler (unset)
             })
+        //setHandler showHelp
     }
