@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "CheckedRepo": {
+      "commandName": "Project",
+      "commandLineArgs": "set \"bb_za\""
+    }
+  }
+}

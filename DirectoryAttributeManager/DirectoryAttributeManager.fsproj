@@ -21,24 +21,28 @@
   <!-- Op: End -->
   <PropertyGroup>
     <PackAsTool>true</PackAsTool>
-    <ToolCommandName>CheckedRepo</ToolCommandName>
-    <PackageId>StarlyCode.CheckedRepo</PackageId>
-    <Title>CheckedRepo</Title>
-    <VersionPrefix>0.2.5</VersionPrefix>
+    <ToolCommandName>DAM</ToolCommandName>
+    <PackageId>StarlyCode.DirectoryAttributeManager</PackageId>
+    <Title>DirectoryAttributeManager</Title>
+    <VersionPrefix>0.0.1</VersionPrefix>
     <Description>
-		  This tool maintains a list of checked repositories.
+		  This tool maintains attributes assigned to folders.
 		</Description>
     <Authors>Paul Staszko</Authors>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <RepositoryUrl>https://github.com/StarlyCode/CheckedRepo</RepositoryUrl>
-    <PackageTags>git</PackageTags>
+    <PackageTags>filesystem</PackageTags>
     <PackageReadmeFile>README.md</PackageReadmeFile>
   </PropertyGroup>
   <ItemGroup>
     <None Include="paket.references" />
     <None Include="publish.ps1" />
     <None Include="README.md" Pack="true" PackagePath="\" />
+    <Content Include="Properties\launchSettings.json" />
     <Compile Include="Program.fs" />
   </ItemGroup>
-  <Import Project=".paket\Paket.Restore.targets" />
+  <ItemGroup>
+    <ProjectReference Include="..\DirectoryAttributeManager.Core\DirectoryAttributeManager.Core.fsproj" />
+  </ItemGroup>
+  <Import Project="..\.paket\Paket.Restore.targets" />
 </Project>

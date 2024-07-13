@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+  <!-- Op: Project _ library net8.0 -->
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <AppendTargetFrameworkToOutputPath>False</AppendTargetFrameworkToOutputPath>
+    <!--GenerateResourceUsePreserializedResources>true</GenerateResourceUsePreserializedResources-->
+    <OutputType>Library</OutputType>
+    <!--<AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>-->
+  </PropertyGroup>
+  <PropertyGroup>
+    <!--<DefineConstants>$(DefineConstants);DIRECTORYATTRIBUTEMANAGER_CORE;NET8_0</DefineConstants>-->
+  </PropertyGroup>
+  <!-- Op: End -->
+  <PropertyGroup>
+    <PackageId>StarlyCode.DirectoryAttributeManager.Core</PackageId>
+    <Title>DirectoryAttributeManager.Core</Title>
+    <VersionPrefix>0.0.1</VersionPrefix>
+    <Description>
+		  This library provides access to the functionality of Directory Attribute Manager.
+		</Description>
+    <Authors>Paul Staszko</Authors>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <RepositoryUrl>https://github.com/StarlyCode/CheckedRepo</RepositoryUrl>
+    <PackageTags>filesystem</PackageTags>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Include="README.md">
+      <PackagePath>\</PackagePath>
+      <Pack>true</Pack>
+    </None>
+    <Compile Include="Utils.fs" />
+    <Compile Include="Commands.fs" />
+  </ItemGroup>
+  <ItemGroup />
+</Project>
