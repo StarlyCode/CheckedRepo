@@ -1,4 +1,11 @@
 source https://api.nuget.org/v3/index.json
 
 storage: none
+//Op: NugetCleanup
+nuget FSharp.Core
 nuget FSharp.SystemCommandLine
+nuget FsUnit.xUnit
+nuget Microsoft.NET.Test.Sdk
+nuget xunit
+nuget xunit.runner.visualstudio
+//Op: End

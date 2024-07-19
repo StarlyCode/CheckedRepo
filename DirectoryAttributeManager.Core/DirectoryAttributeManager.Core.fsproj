@@ -15,7 +15,7 @@
   <PropertyGroup>
     <PackageId>StarlyCode.DirectoryAttributeManager.Core</PackageId>
     <Title>DirectoryAttributeManager.Core</Title>
-    <VersionPrefix>0.1.0</VersionPrefix>
+    <VersionPrefix>0.1.4</VersionPrefix>
     <Description>
 		  This library provides access to the functionality of Directory Attribute Manager.
 		</Description>

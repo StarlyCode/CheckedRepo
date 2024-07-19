@@ -17,14 +17,14 @@ module Commands =
             |> Seq.toList
         with
         | _ -> []
-        |> Seq.map cleanName
+        |> Seq.map (cleanName >> DI >> getExactPathName)
         |> Seq.toList
 
     let isSet(attribute, dir) =
         let dir = defaultToCurrentDirectory dir
         let dirPath = Path.GetFullPath(dir.FullName) |> trimName |> cleanName
 
-        let checkedDirs = list attribute
+        let checkedDirs = list attribute |> List.map lower
         List.contains dirPath checkedDirs
 
     let private writeList(attribute, (content: string list)) =
@@ -49,8 +49,7 @@ module Commands =
         let dirPath = dir.FullName |> cleanName
         let checkedDirs = 
             list attribute
-            |> List.filter (fun line -> line <> dirPath)
-    
+            |> List.filter (fun line -> lower line <> lower dirPath)
     
         writeList(attribute, checkedDirs)
 

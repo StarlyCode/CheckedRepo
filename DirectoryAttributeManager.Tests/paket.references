@@ -1,0 +1,6 @@
+group Main
+FSharp.Core
+FsUnit.xUnit
+xunit
+xunit.runner.visualstudio
+Microsoft.NET.Test.Sdk

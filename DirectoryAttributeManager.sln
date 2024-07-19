@@ -5,7 +5,15 @@ VisualStudioVersion = 17.10.35027.167
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "DirectoryAttributeManager", "DirectoryAttributeManager\DirectoryAttributeManager.fsproj", "{9C8303B0-7087-411A-A58D-253E59BDCC5C}"
 EndProject
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "DirectoryAttributeManager.Core", "DirectoryAttributeManager.Core\DirectoryAttributeManager.Core.fsproj", "{1088A670-ABC4-4F03-AD61-A5EAE942065A}"
+Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "DirectoryAttributeManager.Core", "DirectoryAttributeManager.Core\DirectoryAttributeManager.Core.fsproj", "{1088A670-ABC4-4F03-AD61-A5EAE942065A}"
+EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "DirectoryAttributeManager.Tests", "DirectoryAttributeManager.Tests\DirectoryAttributeManager.Tests.fsproj", "{25451453-A7BF-40C2-8B67-C18F4EBF64DD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{FD29B42E-81CF-47DC-99EF-C105EAAACCFC}"
+	ProjectSection(SolutionItems) = preProject
+		paket.dependencies = paket.dependencies
+		paket.lock = paket.lock
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +29,10 @@ Global
 		{1088A670-ABC4-4F03-AD61-A5EAE942065A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1088A670-ABC4-4F03-AD61-A5EAE942065A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1088A670-ABC4-4F03-AD61-A5EAE942065A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{25451453-A7BF-40C2-8B67-C18F4EBF64DD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{25451453-A7BF-40C2-8B67-C18F4EBF64DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{25451453-A7BF-40C2-8B67-C18F4EBF64DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{25451453-A7BF-40C2-8B67-C18F4EBF64DD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
