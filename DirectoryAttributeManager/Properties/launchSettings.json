@@ -2,7 +2,8 @@
   "profiles": {
     "CheckedRepo": {
       "commandName": "Project",
-      "commandLineArgs": "set \"bb_za\""
+      "commandLineArgs": "isSet bonk",
+      "commandLineArgs2": "isSet bonk \"\""
     }
   }
 }

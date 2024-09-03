@@ -2,12 +2,14 @@ open FSharp.SystemCommandLine
 open System.IO
 open DirectoryAttributeManager.Core.Utils
 open DirectoryAttributeManager.Core.Commands
-open System.CommandLine.Invocation
-open System.CommandLine.Help
-
+    
 [<EntryPoint>] 
 let main argv =
-    let dir = Input.ArgumentMaybe<DirectoryInfo>("Directory", "The directory, or current directory if left blank")
+    let out (x: string) = System.Console.WriteLine x
+    
+    let dirOrCur =
+        let currentDir = new System.Func<DI>(fun () -> System.IO.Directory.GetCurrentDirectory() |> DI)
+        Input.OfArgument(System.CommandLine.Argument<DirectoryInfo>("Directory", currentDir, "The directory, or current directory if left blank"))
 
     let attribute = 
         Input.Argument<string>("Attribute", 
@@ -15,22 +17,16 @@ let main argv =
                 arg.Description <- "An arbitrary attribute name"
                 arg.AddValidator 
                     (fun result -> 
-                        let nameValue = result.GetValueOrDefault() |> str
+                        let nameValue = result.GetValueOrDefault() |> string
                         nameValue
                         |> function
                         | Regex @"^(_|[_a-z0-9]+)$" [x] -> ()
                         | _ -> result.ErrorMessage <- $"Name must contain only letters, numbers, or underscores: {nameValue}"
                     )
         )
-
-    let out (x: string) = System.Console.WriteLine x
     
-    //let showHelp (ctx: InvocationContext) =
-    //    let hc = HelpContext(ctx.HelpBuilder, ctx.Parser.Configuration.RootCommand, System.Console.Out)
-    //    ctx.HelpBuilder.Write(hc)
-        
     rootCommand argv {
-        description "Directory Attribute Manager"
+        description $"Directory Attribute Manager"
         setHandler id
         addCommand (
             command "attributeFile" {
@@ -52,26 +48,25 @@ let main argv =
         addCommand (
             command "toggle" {
                 description "Toggle an attribute for a directory"
-                inputs (attribute, dir)
+                inputs (attribute, dirOrCur)
                 setHandler (toggle)
             })
         addCommand (
             command "isSet" {
                 description "Check if the directory has an attribute"
-                inputs (attribute, dir)
-                setHandler (isSet >> str >> out)
+                inputs (attribute, dirOrCur)
+                setHandler (isSet >> string >> out)
             })
         addCommand (
             command "set" {
                 description "Set an attribute for a directory"
-                inputs (attribute, dir)
+                inputs (attribute, dirOrCur)
                 setHandler (set)
             })
         addCommand (
             command "unset" {
                 description "Unset an attribute for a directory"
-                inputs (attribute, dir)
+                inputs (attribute, dirOrCur)
                 setHandler (unset)
             })
-        //setHandler showHelp
     }

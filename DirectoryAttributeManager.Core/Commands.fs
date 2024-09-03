@@ -4,11 +4,6 @@ open System.IO
 open DirectoryAttributeManager.Core.Utils
 
 module Commands =
-    let private defaultToCurrentDirectory =
-        function
-        | Some x -> x
-        | _ -> System.IO.Directory.GetCurrentDirectory() |> DI
-
     let attributeFile attribute = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) +/+ $"%s{attribute}.DirAttr"
 
     let list attribute =
@@ -20,8 +15,7 @@ module Commands =
         |> Seq.map (cleanName >> DI >> getExactPathName)
         |> Seq.toList
 
-    let isSet(attribute, dir) =
-        let dir = defaultToCurrentDirectory dir
+    let isSet(attribute, (dir: DI)) =
         let dirPath = Path.GetFullPath(dir.FullName) |> trimName |> cleanName
 
         let checkedDirs = list attribute |> List.map lower
@@ -38,14 +32,12 @@ module Commands =
             |> fun text -> File.WriteAllText(attributeFile attribute, text)
 
     let set(attribute, dir) =
-        let dir = defaultToCurrentDirectory dir
-        if not (isSet(attribute, Some dir)) then
+        if not (isSet(attribute, dir)) then
             let checkedDirs = list attribute 
             let newDirLine = dir.FullName |> Path.GetFullPath |> cleanName
             writeList (attribute, (checkedDirs @ [newDirLine]))
 
-    let unset(attribute, dir) =
-        let dir = defaultToCurrentDirectory dir
+    let unset(attribute, (dir: DI)) =
         let dirPath = dir.FullName |> cleanName
         let checkedDirs = 
             list attribute

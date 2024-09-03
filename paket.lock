@@ -1,7 +1,7 @@
 STORAGE: NONE
 NUGET
   remote: https://api.nuget.org/v3/index.json
-    FSharp.Core (8.0.301)
+    FSharp.Core (8.0.400)
     FSharp.SystemCommandLine (0.17.0-beta4)
       FSharp.Core (>= 6.0) - restriction: >= netstandard2.0
       System.CommandLine (>= 2.0.0-beta4.22272.1) - restriction: >= netstandard2.0
