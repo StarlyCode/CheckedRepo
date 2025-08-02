@@ -1,72 +1,79 @@
 open FSharp.SystemCommandLine
+open FSharp.SystemCommandLine.Input
 open System.IO
 open DirectoryAttributeManager.Core.Utils
 open DirectoryAttributeManager.Core.Commands
-    
+
 [<EntryPoint>] 
 let main argv =
     let out (x: string) = System.Console.WriteLine x
     
     let dirOrCur =
-        let currentDir = new System.Func<DI>(fun () -> System.IO.Directory.GetCurrentDirectory() |> DI)
-        Input.OfArgument(System.CommandLine.Argument<DirectoryInfo>("Directory", currentDir, "The directory, or current directory if left blank"))
+        Input.option "Directory"
+        |> defaultValueFactory (fun _ -> System.IO.Directory.GetCurrentDirectory() |> DI)
+        |> desc "The directory, or current directory if left blank"
+        |> addValidator 
+            (fun result ->  
+                let dir = result.GetValue "Directory"
+                if not (Directory.Exists dir) then
+                    result.AddError $"Directory does not exist: %s{dir}"
+            )
 
     let attribute = 
-        Input.Argument<string>("Attribute", 
-            fun arg -> 
-                arg.Description <- "An arbitrary attribute name"
-                arg.AddValidator 
-                    (fun result -> 
-                        let nameValue = result.GetValueOrDefault() |> string
-                        nameValue
-                        |> function
-                        | Regex @"^(_|[_a-z0-9]+)$" [x] -> ()
-                        | _ -> result.ErrorMessage <- $"Name must contain only letters, numbers, or underscores: {nameValue}"
-                    )
-        )
+        Input.argument "Attribute"
+        |> desc "An arbitrary attribute name"
+        |> addValidator 
+            (fun result ->
+                let nameValue = result.GetValue "Attribute"
+                nameValue
+                |> function
+                | Regex @"^(_|[_a-z0-9]+)$" [x] -> ()
+                | _ -> 
+                    result.AddError $"Name must contain only letters, numbers, or underscores: %s{nameValue}"
+            )
     
     rootCommand argv {
         description $"Directory Attribute Manager"
-        setHandler id
+        setAction id
         addCommand (
             command "attributeFile" {
                 description "Output file path for an attribute"
                 inputs attribute
-                setHandler (attributeFile >> out)
+                setAction (attributeFile >> out)
             })
         addCommand (
             command "attributes" {
                 description "List existing attributes"
-                setHandler (attributes >> Seq.iter out)
+                setAction (attributes >> Seq.iter out)
             })
         addCommand (
             command "list" {
                 description "List directories with an attribute"
                 inputs attribute
-                setHandler (list >> Seq.iter out)
+                setAction (list >> Seq.iter out)
             })
         addCommand (
             command "toggle" {
                 description "Toggle an attribute for a directory"
                 inputs (attribute, dirOrCur)
-                setHandler (toggle)
+                setAction (toggle)
             })
         addCommand (
             command "isSet" {
                 description "Check if the directory has an attribute"
                 inputs (attribute, dirOrCur)
-                setHandler (isSet >> string >> out)
+                setAction (isSet >> string >> out)
             })
         addCommand (
             command "set" {
                 description "Set an attribute for a directory"
                 inputs (attribute, dirOrCur)
-                setHandler (set)
+                setAction (set)
             })
         addCommand (
             command "unset" {
                 description "Unset an attribute for a directory"
                 inputs (attribute, dirOrCur)
-                setHandler (unset)
+                setAction (unset)
             })
     }

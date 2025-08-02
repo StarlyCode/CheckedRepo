@@ -15,7 +15,7 @@ module Commands =
         |> Seq.map (cleanName >> DI >> getExactPathName)
         |> Seq.toList
 
-    let isSet(attribute, (dir: DI)) =
+    let isSet((attribute: string), (dir: DI)) =
         let dirPath = Path.GetFullPath(dir.FullName) |> trimName |> cleanName
 
         let checkedDirs = list attribute |> List.map lower

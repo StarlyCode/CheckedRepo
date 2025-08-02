@@ -4,6 +4,7 @@ storage: none
 //Op: NugetCleanup
 nuget FSharp.Core
 nuget FSharp.SystemCommandLine
+#nuget FSharp.SystemCommandLine 1.0.0-beta4
 nuget FsUnit.xUnit
 nuget Microsoft.NET.Test.Sdk
 nuget xunit

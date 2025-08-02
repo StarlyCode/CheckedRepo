@@ -1,22 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
-  <!-- Op: Project _ exe net8.0 -->
+  <!-- Op: Project _ exe net9.0 -->
   <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
+    <TargetFramework>net9.0</TargetFramework>
     <AppendTargetFrameworkToOutputPath>False</AppendTargetFrameworkToOutputPath>
-    <!--GenerateResourceUsePreserializedResources>true</GenerateResourceUsePreserializedResources-->
     <OutputType>Exe</OutputType>
-    <!--<AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>-->
-  </PropertyGroup>
-  <PropertyGroup>
-    <!--<DefineConstants>$(DefineConstants);CHECKEDREPO;NET8_0</DefineConstants>-->
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <PreBuildEvent>IF EXIST C:\DEV\temp\HP\*bin_Debug_CheckedRepo*_* DEL C:\DEV\temp\HP\*bin_Debug_CheckedRepo*_* /Q /F</PreBuildEvent>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <PreBuildEvent>IF EXIST C:\DEV\temp\HP\*bin_Release_CheckedRepo*_* DEL C:\DEV\temp\HP\*bin_Release_CheckedRepo*_* /Q /F</PreBuildEvent>
-    <PreBuildEvent>IF EXIST C:\DEV\temp\HP\C__Dev_Releases_CheckedRepo*_* DEL C:\DEV\temp\HP\C__Dev_Releases_CheckedRepo*_* /Q /F</PreBuildEvent>
+    <PreBuildEvent>IF EXIST C:\DEV\temp\HP\*bin_Debug_DirectoryAttributeManager*_* DEL C:\DEV\temp\HP\*bin_Debug_DirectoryAttributeManager*_* /Q /F</PreBuildEvent>
   </PropertyGroup>
   <!-- Op: End -->
   <PropertyGroup>
@@ -24,7 +15,7 @@
     <ToolCommandName>DAM</ToolCommandName>
     <PackageId>StarlyCode.DirectoryAttributeManager</PackageId>
     <Title>DirectoryAttributeManager</Title>
-    <VersionPrefix>0.1.7</VersionPrefix>
+    <VersionPrefix>0.1.8</VersionPrefix>
     <Description>
 		  This tool maintains attributes assigned to folders.
 		</Description>
