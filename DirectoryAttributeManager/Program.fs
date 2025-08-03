@@ -4,34 +4,34 @@ open System.IO
 open DirectoryAttributeManager.Core.Utils
 open DirectoryAttributeManager.Core.Commands
 
-[<EntryPoint>] 
+[<EntryPoint>]
 let main argv =
     let out (x: string) = System.Console.WriteLine x
-    
+
     let dirOrCur =
         Input.option "Directory"
         |> defaultValueFactory (fun _ -> System.IO.Directory.GetCurrentDirectory() |> DI)
         |> desc "The directory, or current directory if left blank"
-        |> addValidator 
-            (fun result ->  
+        |> addValidator
+            (fun result ->
                 let dir = result.GetValue "Directory"
                 if not (Directory.Exists dir) then
                     result.AddError $"Directory does not exist: %s{dir}"
             )
 
-    let attribute = 
+    let attribute =
         Input.argument "Attribute"
         |> desc "An arbitrary attribute name"
-        |> addValidator 
+        |> addValidator
             (fun result ->
                 let nameValue = result.GetValue "Attribute"
                 nameValue
                 |> function
                 | Regex @"^(_|[_a-z0-9]+)$" [x] -> ()
-                | _ -> 
+                | _ ->
                     result.AddError $"Name must contain only letters, numbers, or underscores: %s{nameValue}"
             )
-    
+
     rootCommand argv {
         description $"Directory Attribute Manager"
         setAction id

@@ -4,11 +4,11 @@ open System.IO
 open System.Diagnostics
 open System.Text.RegularExpressions
 
-module Utils = 
+module Utils =
     let os = Option.defaultValue ""
-    
+
     let ns = function null -> "" | x -> x
-    
+
     let (|NS|) (x: string) : string = x |> ns
 
     [<DebuggerHidden>]
@@ -24,11 +24,11 @@ module Utils =
     let (|Regex|_|) pattern input = regexActivePattern pattern input RegexOptions.IgnoreCase
 
     let trim = ns >> fun x -> x.Trim()
-    
+
     let (+/+) x y = System.IO.Path.Combine(x, y |> trim)
-    
+
     let inline swap a b c = a c b
-    
+
     let inline (|+) a b = Seq.map b a
 
     type DI = DirectoryInfo
@@ -38,7 +38,7 @@ module Utils =
     let lower = function null -> "" | (x: string) -> x.ToLower()
 
     let trimName = function null -> "" | (x: string) -> x.TrimEnd('\\').Trim()
-    
+
     let rec getExactPathName (f: FileSystemInfo) : string =
         let pathName = f.FullName
         if not (File.Exists(pathName) || Directory.Exists(pathName)) then
@@ -55,5 +55,5 @@ module Utils =
     let cleanName = trimName >> lower
 
     let lines (x: string) =  x.Split([|'\r'; '\n'|], StringSplitOptions.RemoveEmptyEntries)
-    
+
     let inline (^) f a = f a

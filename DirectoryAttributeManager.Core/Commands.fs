@@ -26,23 +26,23 @@ module Commands =
         |> List.filter (fun x -> x.Trim() <> "")
         |> function
         | [] -> File.Delete(attributeFile attribute)
-        | lines -> 
+        | lines ->
             lines
-            |> String.concat "\r\n" 
+            |> String.concat "\r\n"
             |> fun text -> File.WriteAllText(attributeFile attribute, text)
 
     let set(attribute, dir) =
         if not (isSet(attribute, dir)) then
-            let checkedDirs = list attribute 
+            let checkedDirs = list attribute
             let newDirLine = dir.FullName |> Path.GetFullPath |> cleanName
             writeList (attribute, (checkedDirs @ [newDirLine]))
 
     let unset(attribute, (dir: DI)) =
         let dirPath = dir.FullName |> cleanName
-        let checkedDirs = 
+        let checkedDirs =
             list attribute
             |> List.filter (fun line -> lower line <> lower dirPath)
-    
+
         writeList(attribute, checkedDirs)
 
     let toggle(attribute, dir) =
