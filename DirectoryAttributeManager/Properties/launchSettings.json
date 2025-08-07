@@ -2,8 +2,8 @@
   "profiles": {
     "CheckedRepo": {
       "commandName": "Project",
-      "commandLineArgs": "isSet bonk",
-      "commandLineArgs2": "isSet bonk \"\""
+      "commandLineArgs": "isSet CheckedRepos kxo",
+      "commandLineArgs2": "isSet CheckedRepos c:\\tempx"
     }
   }
 }

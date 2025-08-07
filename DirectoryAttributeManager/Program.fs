@@ -1,6 +1,5 @@
 open FSharp.SystemCommandLine
 open FSharp.SystemCommandLine.Input
-open System.IO
 open DirectoryAttributeManager.Core.Utils
 open DirectoryAttributeManager.Core.Commands
 
@@ -8,15 +7,14 @@ open DirectoryAttributeManager.Core.Commands
 let main argv =
     let out (x: string) = System.Console.WriteLine x
 
-    let dirOrCur =
-        Input.option "Directory"
-        |> defaultValueFactory (fun _ -> System.IO.Directory.GetCurrentDirectory() |> DI)
+    let specificDirectoryOrCurrent =
+        Input.argument<DI> "Directory"
         |> desc "The directory, or current directory if left blank"
         |> addValidator
             (fun result ->
-                let dir = result.GetValue "Directory"
-                if not (Directory.Exists dir) then
-                    result.AddError $"Directory does not exist: %s{dir}"
+                let dir = result.GetValue<DI> "Directory"
+                if not dir.Exists then
+                    result.AddError $"Directory does not exist: %s{dir.FullName}"
             )
 
     let attribute =
@@ -55,25 +53,25 @@ let main argv =
         addCommand (
             command "toggle" {
                 description "Toggle an attribute for a directory"
-                inputs (attribute, dirOrCur)
+                inputs (attribute, specificDirectoryOrCurrent)
                 setAction (toggle)
             })
         addCommand (
             command "isSet" {
                 description "Check if the directory has an attribute"
-                inputs (attribute, dirOrCur)
+                inputs (attribute, specificDirectoryOrCurrent)
                 setAction (isSet >> string >> out)
             })
         addCommand (
             command "set" {
                 description "Set an attribute for a directory"
-                inputs (attribute, dirOrCur)
+                inputs (attribute, specificDirectoryOrCurrent)
                 setAction (set)
             })
         addCommand (
             command "unset" {
                 description "Unset an attribute for a directory"
-                inputs (attribute, dirOrCur)
+                inputs (attribute, specificDirectoryOrCurrent)
                 setAction (unset)
             })
     }
