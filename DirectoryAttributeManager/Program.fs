@@ -2,19 +2,21 @@ open FSharp.SystemCommandLine
 open FSharp.SystemCommandLine.Input
 open DirectoryAttributeManager.Core.Utils
 open DirectoryAttributeManager.Core.Commands
+open System
 
 [<EntryPoint>]
 let main argv =
     let out (x: string) = System.Console.WriteLine x
 
     let specificDirectoryOrCurrent =
-        Input.argument<DI> "Directory"
+        Input.argumentMaybe<string> "Directory"
         |> desc "The directory, or current directory if left blank"
+        |> defaultValueFactory (fun _ -> System.IO.Directory.GetCurrentDirectory() |> Some)
         |> addValidator
             (fun result ->
-                let dir = result.GetValue<DI> "Directory"
-                if not dir.Exists then
-                    result.AddError $"Directory does not exist: %s{dir.FullName}"
+                let dir = result.GetValue "Directory"
+                if dir |> System.IO.Directory.Exists |> not then
+                    result.AddError $"Directory does not exist: %s{dir}"
             )
 
     let attribute =
@@ -30,6 +32,13 @@ let main argv =
                     result.AddError $"Name must contain only letters, numbers, or underscores: %s{nameValue}"
             )
 
+    let adapt (fn: ('t * DI -> unit)) = 
+        fun (a: 't, b: string option) -> 
+            b
+            |> function 
+            | Some x -> fn(a, (x |> DI))
+            | _ -> failwith "Assumption failed"
+            
     rootCommand argv {
         description $"Directory Attribute Manager"
         setAction id
@@ -54,24 +63,24 @@ let main argv =
             command "toggle" {
                 description "Toggle an attribute for a directory"
                 inputs (attribute, specificDirectoryOrCurrent)
-                setAction (toggle)
+                setAction (adapt toggle)
             })
         addCommand (
             command "isSet" {
                 description "Check if the directory has an attribute"
                 inputs (attribute, specificDirectoryOrCurrent)
-                setAction (isSet >> string >> out)
+                setAction (adapt (isSet >> string >> out))
             })
         addCommand (
             command "set" {
                 description "Set an attribute for a directory"
                 inputs (attribute, specificDirectoryOrCurrent)
-                setAction (set)
+                setAction (adapt set)
             })
         addCommand (
             command "unset" {
                 description "Unset an attribute for a directory"
                 inputs (attribute, specificDirectoryOrCurrent)
-                setAction (unset)
+                setAction (adapt unset)
             })
     }

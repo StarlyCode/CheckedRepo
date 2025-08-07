@@ -2,8 +2,8 @@
   "profiles": {
     "CheckedRepo": {
       "commandName": "Project",
-      "commandLineArgs": "isSet CheckedRepos kxo",
-      "commandLineArgs2": "isSet CheckedRepos c:\\tempx"
+      "commandLineArgs": "isSet CheckedRepos",
+      "commandLineArgs2": "isSet CheckedRepos C:\\WesternCapital\\ABOFileImporter"
     }
   }
 }

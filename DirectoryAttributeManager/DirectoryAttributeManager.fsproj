@@ -15,7 +15,7 @@
     <ToolCommandName>DAM</ToolCommandName>
     <PackageId>StarlyCode.DirectoryAttributeManager</PackageId>
     <Title>DirectoryAttributeManager</Title>
-    <VersionPrefix>0.1.9</VersionPrefix>
+    <VersionPrefix>0.1.11</VersionPrefix>
     <Description>
 		  This tool maintains attributes assigned to folders.
 		</Description>
