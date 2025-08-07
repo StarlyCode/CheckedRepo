@@ -14,9 +14,9 @@ let main argv =
         |> defaultValueFactory (fun _ -> System.IO.Directory.GetCurrentDirectory() |> Some)
         |> addValidator
             (fun result ->
-                let dir = result.GetValue "Directory"
-                if dir |> System.IO.Directory.Exists |> not then
-                    result.AddError $"Directory does not exist: %s{dir}"
+                let specificDirectoryOrCurrent = (result.GetValue<string option> "Directory").Value
+                if specificDirectoryOrCurrent |> System.IO.Directory.Exists |> not then
+                    result.AddError $"Directory does not exist: %s{specificDirectoryOrCurrent}"
             )
 
     let attribute =
@@ -24,12 +24,12 @@ let main argv =
         |> desc "An arbitrary attribute name"
         |> addValidator
             (fun result ->
-                let nameValue = result.GetValue "Attribute"
-                nameValue
+                let attributeName = result.GetValue "Attribute"
+                attributeName
                 |> function
                 | Regex @"^(_|[_a-z0-9]+)$" [x] -> ()
                 | _ ->
-                    result.AddError $"Name must contain only letters, numbers, or underscores: %s{nameValue}"
+                    result.AddError $"Name must contain only letters, numbers, or underscores: %s{attributeName}"
             )
 
     let adapt (fn: ('t * DI -> unit)) = 
