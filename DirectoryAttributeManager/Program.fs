@@ -39,6 +39,14 @@ let main argv =
             | Some x -> fn(a, (x |> DI))
             | _ -> failwith "Assumption failed"
             
+
+    let adapt0 (fn: (DI -> unit)) = 
+        fun (b: string option) -> 
+            b
+            |> function 
+            | Some x -> fn(x |> DI)
+            | _ -> failwith "Assumption failed"
+            
     rootCommand argv {
         description $"Directory Attribute Manager"
         setAction id
@@ -47,6 +55,12 @@ let main argv =
                 description "Output file path for an attribute"
                 inputs attribute
                 setAction (attributeFile >> out)
+            })
+        addCommand (
+            command "here" {
+                description "List attributes for a directory"
+                inputs specificDirectoryOrCurrent
+                setAction (adapt0 (here >> Seq.iter out))
             })
         addCommand (
             command "attributes" {
