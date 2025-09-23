@@ -1,17 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
-  <!-- Op: Project _ library netstandard2.0 -->
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <AppendTargetFrameworkToOutputPath>False</AppendTargetFrameworkToOutputPath>
-    <!--GenerateResourceUsePreserializedResources>true</GenerateResourceUsePreserializedResources-->
     <OutputType>Library</OutputType>
-    <!--<AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>-->
+    <WarningsAsErrors>0025;3239;FS0001;FS0020;FS0025;FS0026;FS0193</WarningsAsErrors>
   </PropertyGroup>
-  <PropertyGroup>
-    <!--<DefineConstants>$(DefineConstants);DIRECTORYATTRIBUTEMANAGER_CORE;NET8_0</DefineConstants>-->
-  </PropertyGroup>
-  <!-- Op: End -->
   <PropertyGroup>
     <PackageId>StarlyCode.DirectoryAttributeManager.Core</PackageId>
     <Title>DirectoryAttributeManager.Core</Title>

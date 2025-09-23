@@ -1,21 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
-  <!-- Op: Project _ exe net9.0 -->
   <PropertyGroup>
     <TargetFramework>net9.0</TargetFramework>
     <AppendTargetFrameworkToOutputPath>False</AppendTargetFrameworkToOutputPath>
     <OutputType>Exe</OutputType>
+    <WarningsAsErrors>0025;3239;FS0001;FS0020;FS0025;FS0026;FS0193</WarningsAsErrors>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <PreBuildEvent>IF EXIST C:\DEV\temp\HP\*bin_Debug_DirectoryAttributeManager*_* DEL C:\DEV\temp\HP\*bin_Debug_DirectoryAttributeManager*_* /Q /F</PreBuildEvent>
-  </PropertyGroup>
-  <!-- Op: End -->
   <PropertyGroup>
     <PackAsTool>true</PackAsTool>
     <ToolCommandName>DAM</ToolCommandName>
     <PackageId>StarlyCode.DirectoryAttributeManager</PackageId>
     <Title>DirectoryAttributeManager</Title>
-    <VersionPrefix>0.2.0</VersionPrefix>
+    <VersionPrefix>0.2.1</VersionPrefix>
     <Description>
 		  This tool maintains attributes assigned to folders.
 		</Description>

@@ -51,6 +51,11 @@ let main argv =
         description $"Directory Attribute Manager"
         setAction id
         addCommand (
+            command "attributes" {
+                description "List existing attributes"
+                setAction (attributes >> Seq.iter out)
+            })
+        addCommand (
             command "attributeFile" {
                 description "Output file path for an attribute"
                 inputs attribute
@@ -63,9 +68,10 @@ let main argv =
                 setAction (adapt0 (here >> Seq.iter out))
             })
         addCommand (
-            command "attributes" {
-                description "List existing attributes"
-                setAction (attributes >> Seq.iter out)
+            command "isSet" {
+                description "Check if the directory has an attribute"
+                inputs (attribute, specificDirectoryOrCurrent)
+                setAction (adapt (isSet >> string >> out))
             })
         addCommand (
             command "list" {
@@ -74,22 +80,16 @@ let main argv =
                 setAction (list >> Seq.iter out)
             })
         addCommand (
-            command "toggle" {
-                description "Toggle an attribute for a directory"
-                inputs (attribute, specificDirectoryOrCurrent)
-                setAction (adapt toggle)
-            })
-        addCommand (
-            command "isSet" {
-                description "Check if the directory has an attribute"
-                inputs (attribute, specificDirectoryOrCurrent)
-                setAction (adapt (isSet >> string >> out))
-            })
-        addCommand (
             command "set" {
                 description "Set an attribute for a directory"
                 inputs (attribute, specificDirectoryOrCurrent)
                 setAction (adapt set)
+            })
+        addCommand (
+            command "toggle" {
+                description "Toggle an attribute for a directory"
+                inputs (attribute, specificDirectoryOrCurrent)
+                setAction (adapt toggle)
             })
         addCommand (
             command "unset" {
