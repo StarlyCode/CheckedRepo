@@ -32,21 +32,21 @@ let main argv =
                     result.AddError $"Name must contain only letters, numbers, or underscores: %s{attributeName}"
             )
 
-    let adapt (fn: ('t * DI -> unit)) = 
-        fun (a: 't, b: string option) -> 
+    let adapt (fn: ('t * DI -> unit)) =
+        fun (a: 't, b: string option) ->
             b
-            |> function 
+            |> function
             | Some x -> fn(a, (x |> DI))
             | _ -> failwith "Assumption failed"
-            
 
-    let adapt0 (fn: (DI -> unit)) = 
-        fun (b: string option) -> 
+
+    let adapt0 (fn: (DI -> unit)) =
+        fun (b: string option) ->
             b
-            |> function 
+            |> function
             | Some x -> fn(x |> DI)
             | _ -> failwith "Assumption failed"
-            
+
     rootCommand argv {
         description $"Directory Attribute Manager"
         setAction id

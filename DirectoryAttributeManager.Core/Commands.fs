@@ -55,11 +55,11 @@ module Commands =
         Directory.GetFiles(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "*.DirAttr")
         |+ fun x -> Path.GetFileNameWithoutExtension(x)
         |> Seq.toList
-        
+
     let here(dir: DI) =
         attributes()
         |> Seq.map
-            ^ fun x -> 
+            ^ fun x ->
                 if isSet(x, dir) then
                     $"+ %s{x}"
                 else
